@@ -25,6 +25,7 @@ import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.SimpleAdapter.ViewBinder;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
 public class ViagemListActivity extends ListActivity implements OnItemClickListener,
 														OnClickListener, ViewBinder {
@@ -131,11 +132,11 @@ public class ViagemListActivity extends ListActivity implements OnItemClickListe
 		this.viagemSelecionada  = position;
 		alertDialog.show();
 		
-//		Map<String, Object> map = viagens.get(position);
-//		String destino = (String) map.get("destino");
-//		String mensagem = "Viagem selecionada" + destino;
-//		Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
-//		startActivity(new Intent(this, GastoListActivity.class));
+		Map<String, Object> map = viagens.get(position);
+		String destino = (String) map.get("destino");
+		String mensagem = "Viagem selecionada" + destino;
+		Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_SHORT).show();
+		startActivity(new Intent(this, GastoListActivity.class));
 	}
 	
 	@Override
@@ -198,6 +199,7 @@ public class ViagemListActivity extends ListActivity implements OnItemClickListe
 	public boolean setViewValue(View view, Object data,	String textRepresentation) {
 		if (view.getId() == R.id.barraProgresso) {
 			Double valores[] = (Double[]) data;
+			valores[0] = (double) 1;
 			ProgressBar progressBar = (ProgressBar) view;
 			progressBar.setMax(valores[0].intValue());
 			progressBar.setSecondaryProgress(valores[1].intValue());
